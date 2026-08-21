@@ -17,16 +17,13 @@
 //   human (the admin) can check it against the real bank statement.
 // =============================================================
 
-import { neon } from '@netlify/neon';
-
-// `neon()` with no arguments automatically reads the NETLIFY_DATABASE_URL
-// environment variable that Netlify sets for you once a database exists.
-const sql = neon();
+import { getDatabase } from '@netlify/database';
+const db = getDatabase();
 
 // Runs once per cold start — makes sure the table exists before we try
 // to insert into it. Safe to leave as-is.
 async function ensureTable() {
-  await sql`
+  await db.sql`
     CREATE TABLE IF NOT EXISTS orders (
       id SERIAL PRIMARY KEY,
       ticket_type TEXT NOT NULL,
@@ -66,7 +63,7 @@ export default async (req) => {
   try {
     await ensureTable();
 
-    await sql`
+    await db.sql`
       INSERT INTO orders (ticket_type, ticket_price, buyer_name, buyer_email, payment_ref)
       VALUES (${ticketType}, ${ticketPrice}, ${buyerName}, ${buyerEmail}, ${paymentRef})
     `;
