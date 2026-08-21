@@ -43,7 +43,7 @@ export default async (req) => {
   }
 
   try {
-    const rows = await sql`
+    const rows = await db.sql`
       SELECT id, ticket_type, ticket_price, buyer_name, buyer_email,
              payment_ref, status, created_at
       FROM orders
