@@ -19,9 +19,8 @@
 //     needs admin access.
 // =============================================================
 
-import { neon } from '@netlify/neon';
-
-const sql = neon();
+import { getDatabase } from '@netlify/database';
+const db = getDatabase();
 
 export default async (req) => {
   if (req.method !== 'GET') {
