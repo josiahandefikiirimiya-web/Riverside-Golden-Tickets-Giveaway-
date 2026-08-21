@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Orders</title>
+  <!-- ⚠️ On purpose, this page has NO Open Graph tags and shouldn't be
+       linked from anywhere public — it's not meant to be shared. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Small admin-only styles, kept separate from the main site look */
+    .admin-wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+    .admin-gate { max-width: 360px; margin: 80px auto; text-align: center; }
+    .admin-gate input { width: 100%; margin-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 13px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid rgba(201,162,39,0.2); }
+    th { color: var(--muted); text-transform: uppercase; font-size: 11px; letter-spacing: 0.04em; }
+    td { color: var(--parchment); }
+    .status-pill { padding: 2px 8px; border-radius: 999px; font-size: 11px; background: rgba(201,162,39,0.15); color: var(--brass); }
+    .admin-error { color: var(--ember); margin-top: 16px; }
+    .admin-refresh { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       TOKEN GATE
+       ✏️ This asks for the same ADMIN_TOKEN you set in Netlify's
+       environment variables. It's stored only in this browser tab's
+       memory (a JS variable) — never saved to localStorage/cookies,
+       so you'll need to re-enter it each visit. That's intentional:
+       it avoids leaving the token sitting around in browser storage.
+  ========================================================== -->
+  <div class="admin-wrap">
+    <div id="gate" class="admin-gate">
+      <h2>Admin access</h2>
+      <p class="hero__sub">Enter the admin token to view ticket orders.</p>
+      <input class="modal__input" type="password" id="token-input" placeholder="Admin token" />
+      <button class="cta" id="unlock-btn" type="button">Unlock</button>
+      <p class="admin-error" id="gate-error"></p>
+    </div>
+
+    <div id="dashboard" style="display:none;">
+      <h2>Ticket orders</h2>
+      <p class="hero__sub">
+        Cross-check each payment reference against your bank statement,
+        then update the row's status manually in your database
+        (or extend this page with an "update status" button — see
+        README for pointers).
+      </p>
+      <button class="btn btn--outline admin-refresh" id="refresh-btn" type="button">Refresh</button>
+      <table id="orders-table">
+        <thead>
+          <tr>
+            <th>Submitted</th>
+            <th>Ticket</th>
+            <th>Price</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Payment ref</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="orders-body"></tbody>
+      </table>
+      <p class="admin-error" id="dashboard-error"></p>
+    </div>
+  </div>
+
+  <script>
+    let token = '';
+
+    const gate = document.getElementById('gate');
+    const dashboard = document.getElementById('dashboard');
+    const tokenInput = document.getElementById('token-input');
+    const gateError = document.getElementById('gate-error');
+    const dashboardError = document.getElementById('dashboard-error');
+    const ordersBody = document.getElementById('orders-body');
+
+    async function loadOrders() {
+      dashboardError.textContent = '';
+      try {
+        const res = await fetch('/.netlify/functions/get-orders', {
+          headers: { Authorization: 'Bearer ' + token },
+        });
+
+        if (res.status === 401) {
+          // Token was wrong — kick back to the gate.
+          dashboard.style.display = 'none';
+          gate.style.display = 'block';
+          gateError.textContent = 'Incorrect token.';
+          return;
+        }
+
+        if (!res.ok) throw new Error('Server responded with ' + res.status);
+
+        const data = await res.json();
+        ordersBody.innerHTML = '';
+
+        if (data.orders.length === 0) {
+          ordersBody.innerHTML = '<tr><td colspan="7">No orders yet.</td></tr>';
+          return;
+        }
+
+        for (const order of data.orders) {
+          const tr = document.createElement('tr');
+          const submitted = new Date(order.created_at).toLocaleString();
+          tr.innerHTML = `
+            <td>${submitted}</td>
+            <td>${escapeHtml(order.ticket_type)}</td>
+            <td>${escapeHtml(order.ticket_price)}</td>
+            <td>${escapeHtml(order.buyer_name)}</td>
+            <td>${escapeHtml(order.buyer_email)}</td>
+            <td>${escapeHtml(order.payment_ref)}</td>
+            <td><span class="status-pill">${escapeHtml(order.status)}</span></td>
+          `;
+          ordersBody.appendChild(tr);
+        }
+      } catch (err) {
+        dashboardError.textContent = 'Could not load orders: ' + err.message;
+      }
+    }
+
+    // Minimal HTML-escaping so buyer-entered text can't break the table
+    // markup (basic XSS hygiene for anything rendered from user input).
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str ?? '';
+      return div.innerHTML;
+    }
+
+    document.getElementById('unlock-btn').addEventListener('click', async () => {
+      token = tokenInput.value.trim();
+      gateError.textContent = '';
+      if (!token) {
+        gateError.textContent = 'Enter a token.';
+        return;
+      }
+      gate.style.display = 'none';
+      dashboard.style.display = 'block';
+      await loadOrders();
+    });
+
+    document.getElementById('refresh-btn').addEventListener('click', loadOrders);
+  </script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- =========================================================
+       BROWSER TAB TITLE + FAVICON
+       This is what shows in the browser tab, NOT the link preview.
+  ========================================================== -->
+  <title> Riverside Youth Fund- FYD</title>
+  <meta name="description" content="One ticket. Join the Golden Ticket Draw, benefiting the Riverside Youth giveaway." />
+
+  <!-- =========================================================
+       ⭐ THIS is the part your original question was about.
+       These "Open Graph" tags control the preview card that shows
+       up when this link is pasted into iMessage, Slack, WhatsApp,
+       Discord, LinkedIn, etc. Every value below is safe to edit.
+  ========================================================== -->
+
+  <!-- Shown as the bold title in the preview card -->
+  <meta property="og:title" content="The Golden Ticket Draw — Annual Charity Gala" />
+
+  <!-- Shown as the smaller description text under the title -->
+  <meta property="og:description" content="One ticket. Join the Golden Ticket Draw, benefiting the Riverside Youth giveaway." />
+
+  <!-- The preview thumbnail image. Ideal size: 1200x630px (this repo already includes one at images/og-image.png). 
+       ⚠️ IMPORTANT: this MUST be a full absolute URL (https://...) once deployed — 
+       most apps won't fetch a relative path like "images/og-image.png" for previews. 
+       Replace YOUR-SITE-NAME once you deploy to Netlify. -->
+  <meta property="og:image" content="https://YOUR-SITE-NAME.netlify.app/images/og-image.png" />
+
+  <!-- The canonical/"real" URL for this page. Replace once deployed. -->
+  <meta property="og:url" content="https://YOUR-SITE-NAME.netlify.app/" />
+
+  <!-- "website" is correct for a normal page. Other values exist (article, video, etc.) but you won't need them here. -->
+  <meta property="og:type" content="website" />
+
+  <!-- =========================================================
+       TWITTER / X CARD TAGS
+       X reads its own tags instead of always falling back to Open Graph.
+       "summary_large_image" = big image card (what you want for an event page).
+  ========================================================== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Golden Ticket Draw — Annual Charity Gala" />
+  <meta name="twitter:description" content="One ticket. Join the Golden Ticket Draw, benefiting the Riverside Youth giveaway." />
+  <meta name="twitter:image" content="https://YOUR-SITE-NAME.netlify.app/images/og-image.png" />
+
+  <!-- Fonts: Fraunces (ticket/gala display serif) + Inter (body) + IBM Plex Mono (ticket numbers) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- =========================================================
+       NAV
+  ========================================================== -->
+  <header class="nav">
+    <div class="nav__mark">GOLDEN&nbsp;TICKET</div>
+    <a class="nav__cta" href="#tickets">Buy a ticket</a>
+  </header>
+
+  <!-- =========================================================
+       HERO — the "ticket stub" signature element.
+       EDIT: event name, date, tagline, ticket number text.
+  ========================================================== -->
+  <section class="hero">
+    <div class="stub">
+      <div class="stub__main">
+        <p class="eyebrow">Annual Charity Gala</p>
+        <!-- EDIT: event name -->
+        <h1 class="title">The Golden<br />Ticket Giveaway</h1>
+        <!-- EDIT: tagline -->
+        <p class="tagline">One ticket. win more.</p>
+
+        <!-- EDIT: date / time / venue -->
+        <div class="pill"> The Riverside Youth Fund Giveaway</div>
+
+        <a class="btn btn--primary" href="#tickets">Grab prizes</a>
+      </div>
+
+      <!-- perforation divider — decorative, no edits needed -->
+      <div class="stub__perf" aria-hidden="true"></div>
+
+      <div class="stub__side">
+        <!-- EDIT: this ticket number is just decorative flavor -->
+        <p class="stub__label">No.</p>
+        <p class="stub__number">000241</p>
+        <p class="stub__label">Admit One</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       HOW IT WORKS
+       EDIT: the three step descriptions.
+  ========================================================== -->
+  <section class="section">
+    <h2 class="section__title">How the draw works</h2>
+    <div class="steps">
+      <div class="step">
+        <p class="step__mark">Buy</p>
+        <p class="step__text">Purchase a ticket below. Every ticket is entered into the draw automatically — no extra sign-up.</p>
+      </div>
+      <div class="step">
+        <p class="step__mark">Give-away</p>
+        <p class="step__text"> Get various amounts according to tickets. and stand a chance to win more from draw</p>
+      </div>
+      <div class="step">
+        <p class="step__mark">Win</p>
+        <p class="step__text">Numbers are drawn and you get to win more.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PRIZES
+       EDIT: add/remove/rename prize tiers freely — each .prize
+       block is self-contained, copy/paste to add more.
+  ========================================================== -->
+  <section class="section section--velvet">
+    <h2 class="section__title">What you could win</h2>
+    <div class="prizes">
+      <div class="prize">
+        <p class="prize__tier">Bronze Win Prize</p>
+        <p class="prize__name"> 2000naira Giveaway </p>
+        <p class="prize__desc"> A chance for draw. to win a bag of goodies</p>
+      </div>
+      <div class="prize">
+        <p class="prize__tier">Silver Win Prize</p>
+        <p class="prize__name">3000naira Giveaway</p>
+        <p class="prize__desc"> A chance to win 20000naira and bag of goodies .</p>
+      </div>
+      <div class="prize">
+        <p class="prize__tier">Gold Win Prize</p>
+        <p class="prize__name"> 5000naira Giveaway</p>
+        <p class="prize__desc">Wireless headphones and a portable speaker, 30000naira and a bag of goodies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       TICKETS / PRICING
+       EDIT: these are now BUTTONS (not links) — clicking one opens
+       the payment-details modal defined further down the page.
+       data-ticket-name / data-ticket-price feed the modal's text.
+
+       ⚠️ IMPORTANT REALITY CHECK: this modal only *displays* text.
+       It does not take payment, verify anything, or talk to a bank.
+       It's the equivalent of a printed card that says "send $65 to
+       this account." If you want to actually collect money online,
+       you need a real payment processor (Stripe, PayPal, Square,
+       a ticketing platform) — see the README for why.
+  ========================================================== -->
+  <section class="section" id="tickets">
+    <h2 class="section__title">Get tickets</h2>
+    <div class="tickets">
+      <div class="ticket-card">
+        <p class="ticket-card__name">Bronze</p>
+        <p class="ticket-card__price">1000naira</p>
+        <p class="ticket-card__desc"> get 2000naira giveaway and win lots of goodies.</p>
+        <button class="btn btn--outline" type="button"
+                data-ticket-name="Bronze" data-ticket-price="1000naira">Select</button>
+      </div>
+      <div class="ticket-card ticket-card--highlight">
+        <p class="ticket-card__badge">Most popular</p>
+        <p class="ticket-card__name">Silver</p>
+        <p class="ticket-card__price">1500naira</p>
+        <p class="ticket-card__desc"> 3000naira giveaway win 20000naira and a bag of goodies .</p>
+        <button class="btn btn--primary" type="button"
+                data-ticket-name="Silver" data-ticket-price="1500naira">Select</button>
+      </div>
+      <div class="ticket-card">
+        <p class="ticket-card__name">Gold</p>
+        <p class="ticket-card__price">3000naira</p>
+        <p class="ticket-card__desc">5000nara giveaway and win Wireless headphones and a portable speaker, 30000naira and a bag of goodies.</p>
+        <button class="btn btn--outline" type="button"
+                data-ticket-name="Gold" data-ticket-price="3000naira">Select</button>
+      </div>
+    </div>
+    <p class="fine-print">All proceeds benefit the Riverside Youth Fund. All applicants will have access  to giveaway prior to payments whether qualified for draw or not.</p>
+  </section>
+
+  <!-- =========================================================
+       PAYMENT DETAILS MODAL
+       Hidden by default (see .modal { display:none } in style.css).
+       JS at the bottom of the page shows it when a ticket "Select"
+       button is clicked, and fills in the ticket name/price.
+
+       ✏️ EDIT the bank/payment fields below — this is placeholder
+       data. Swap in your real account name, number, routing/IBAN,
+       or a Venmo/Zelle/PayPal.me handle, whatever you actually use.
+  ========================================================== -->
+  <div class="modal" id="payment-modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal__close" type="button" data-close-modal aria-label="Close">✕</button>
+
+      <p class="section__eyebrow">Complete your reservation</p>
+      <h3 id="modal-title">
+        <!-- filled in by JS: e.g. "Pair — $120" -->
+        <span id="modal-ticket-name">Ticket</span> —
+        <span id="modal-ticket-price">$0</span>
+      </h3>
+
+      <p class="modal__note">
+        ✏️ Instruction text — Send your payment using the details below,
+        then fill in the form underneath to confirm your seat.
+        NOTE: Eligible for draw or not giveaways are available.
+      </p>
+
+      <dl class="modal__details">
+        <div class="modal__row">
+          <dt>✏️ Payment method</dt>
+          <dd>Bank transfer</dd>
+        </div>
+        <div class="modal__row">
+          <dt>✏️ Account name</dt>
+          <dd> Olamilekan Rilwan(RiversideYouthEmpowerment</dd>
+        </div>
+        <div class="modal__row">
+          <dt>✏️ Account number</dt>
+          <dd> 901-315-6549 </dd>
+        </div>
+        <div class="modal__row">
+          <dt>✏️ Bank Type</dt>
+          <dd> Palmpay </dd>
+        </div>
+        <div class="modal__row">
+          <dt>✏️ Reference</dt>
+          <!-- data-ticket-name value gets echoed into this span by JS -->
+          <dd>GOLDENDRAW-<span id="modal-ticket-ref">SINGLE</span></dd>
+        </div>
+      </dl>
+
+      <!-- =====================================================
+           CONFIRMATION FORM
+           Deliberately asks for the payer's OWN name + email and
+           the payment reference/transaction ID — NOT their bank
+           account details. Refunds should always be issued back
+           through the original payment method (or manually,
+           matched against the reference number below), never by
+           collecting a buyer's account/routing numbers on a web
+           form — that pattern is how phishing pages work, so this
+           prototype intentionally avoids it.
+      ====================================================== -->
+      <form id="confirmation-form" class="modal__form">
+        <label class="modal__label" for="buyer-name">Full name</label>
+        <input class="modal__input" type="text" id="buyer-name" name="buyerName" required
+               placeholder="Jordan Alvarez" />
+
+        <label class="modal__label" for="buyer-email">Email</label>
+        <input class="modal__input" type="email" id="buyer-email" name="buyerEmail" required
+               placeholder="jordan@example.com" />
+
+        <label class="modal__label" for="payment-ref">Payment reference / transaction ID</label>
+        <input class="modal__input" type="text" id="payment-ref" name="paymentRef" required
+               placeholder="e.g. the confirmation code your bank gave you" />
+        <p class="modal__hint">
+          ✏️ Hint text — Find this in your bank app's transfer receipt
+          or confirmation screen. We use it to match your payment to
+          your seat — we never ask for your account or card numbers.
+        </p>
+
+        <p class="modal__note modal__note--small">
+          ✏️ Fine print — Submitting this form does not charge you
+          anything; it just records that you say you've sent payment,
+          so the organizer can confirm it against their bank statement.
+          This is a placeholder prototype — no real payment is
+          processed here.
+        </p>
+
+        <button class="btn btn--primary" type="submit" id="modal-submit-btn">
+         Submit confirmation
+        </button>
+        <p class="modal__status" id="modal-status" role="status"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL BEHAVIOR (plain JS, no framework/build step needed)
+       - Clicking any [data-ticket-name] button opens the modal and
+         fills in the ticket name/price/reference text.
+       - Clicking the backdrop, the ✕, or pressing Escape closes it.
+  ========================================================== -->
+  <script>
+    const modal = document.getElementById('payment-modal');
+    const nameEl = document.getElementById('modal-ticket-name');
+    const priceEl = document.getElementById('modal-ticket-price');
+    const refEl = document.getElementById('modal-ticket-ref');
+    const form = document.getElementById('confirmation-form');
+    const statusEl = document.getElementById('modal-status');
+    const submitBtn = document.getElementById('modal-submit-btn');
+
+    let currentTicketName = '';
+    let currentTicketPrice = '';
+
+    function openModal(name, price) {
+      currentTicketName = name;
+      currentTicketPrice = price;
+      nameEl.textContent = name;
+      priceEl.textContent = price;
+      refEl.textContent = name.toUpperCase().replace(/\s+/g, '');
+      form.reset();
+      statusEl.textContent = '';
+      statusEl.className = 'modal__status';
+      modal.classList.add('modal--open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      modal.classList.remove('modal--open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    document.querySelectorAll('[data-ticket-name]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openModal(btn.dataset.ticketName, btn.dataset.ticketPrice);
+      });
+    });
+
+    document.querySelectorAll('[data-close-modal]').forEach(el => {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // =========================================================
+    // FORM SUBMIT — sends the confirmation to a Netlify Function
+    // (netlify/functions/submit-order.js), which writes a row into
+    // Netlify DB. This ONLY works once deployed on Netlify — it will
+    // fail silently-ish (show the error message) if you just open
+    // index.html directly as a local file, since there's no server
+    // to receive the request.
+    // =========================================================
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      statusEl.textContent = 'Submitting…';
+      statusEl.className = 'modal__status';
+
+      const payload = {
+        ticketType: currentTicketName,
+        ticketPrice: currentTicketPrice,
+        buyerName: document.getElementById('buyer-name').value.trim(),
+        buyerEmail: document.getElementById('buyer-email').value.trim(),
+        paymentRef: document.getElementById('payment-ref').value.trim(),
+      };
+
+      try {
+        const res = await fetch('/.netlify/functions/submit-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error('Server responded with ' + res.status);
+
+        statusEl.textContent = '✏️ Success message — Thanks! We\'ll confirm your seat by email once payment is verified.';
+        statusEl.className = 'modal__status modal__status--success';
+        form.reset();
+        alert(' Submitted! we\'ll confirm your request by email once payment is verified.')
+      } catch (err) {
+        statusEl.textContent = 'Something went wrong submitting this — please try again or email ' +
+          'questions@example.com directly. (' + err.message + ')';
+        statusEl.className = 'modal__status modal__status--error';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+
+  <!-- =========================================================
+       FOOTER
+       EDIT: contact info / social links / org name.
+  ========================================================== -->
+  <footer class="footer">
+    <p>The Golden Ticket Draw · Benefiting the Riverside Youth Fund . For All</p>
+    <p class="footer__muted">Questions? <a href="mailto:Riversideyouthfund@gmail.com">Riversideyouthfund@gmail.com</a></p>
+  </footer>
+
+</body>
+</html>

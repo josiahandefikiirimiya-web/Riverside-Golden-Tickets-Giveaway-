@@ -1,0 +1,34 @@
+# =============================================================
+# NETLIFY CONFIG
+# This file is optional for a simple static site like this one —
+# Netlify will happily deploy index.html/style.css with zero config.
+# It's included so you can see where these settings live if you
+# outgrow the defaults later.
+# =============================================================
+
+[build]
+  # Folder that gets published as the live site.
+  # "." means "this whole folder" — fine since everything here
+  # (index.html, style.css, images/) is meant to be public.
+  # NOTE: admin.html is technically public too (anyone who guesses the
+  # URL can load the page) — it's just useless without the ADMIN_TOKEN,
+  # which is checked server-side in get-orders.js, not in this file.
+  publish = "."
+
+  # No build step needed — this is plain HTML/CSS, not a framework.
+  # If you later add something like a static site generator, you'd
+  # put its build command here, e.g. command = "npm run build"
+  command = ""
+
+  # Tells Netlify where to find the serverless functions
+  # (netlify/functions/submit-order.js and get-orders.js).
+  functions = "netlify/functions"
+
+[[headers]]
+  # Applies to every path on the site
+  for = "/*"
+  [headers.values]
+    # Basic security headers — safe defaults, not required for the
+    # OG-preview learning goal, but good practice for anything you deploy.
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
